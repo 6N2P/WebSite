@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebSite.interfaces;
+using WebSite.ViewModels;
 
 namespace WebSite.Controllers
 {
@@ -16,9 +17,12 @@ namespace WebSite.Controllers
 
         public ViewResult ListCar()
         {
-            ViewBag.Category = "Хоть чё"; //при помощи viewBag можно передавать что угодно в представление
-            var cars=_allCars.Cars;
-            return View(cars);
+              ViewBag.Tatel = "Хоть чё можно передать"; //при помощи viewBag можно передавать что угодно в представление
+            //  var cars=_allCars.Cars;
+            CarsListViweModel obj = new CarsListViweModel();
+            obj.allCars=_allCars.Cars;
+            obj.currCategory = "Автомобили";
+            return View(obj);
         }
     }
 }
