@@ -1,0 +1,26 @@
+﻿@using WebSite.Models
+@model IEnumerable<Car>
+@{
+    ViewData["Title"] = "Авто";
+}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>ListCar</title>
+    </head>
+    <body>
+        
+        <h1>Все автомобили</h1>
+        <h3>@ViewBag.Category</h3>
+        @{
+            foreach(var car in Model){
+                <div>
+                <h2> Модель: @car.name</h2>
+                <p>Цена: @car.price.ToString("c")</p>
+                </div>
+            }
+        }
+    </body>
+</html>

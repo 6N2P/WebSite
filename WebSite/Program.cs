@@ -1,7 +1,13 @@
+using WebSite.interfaces;
+using WebSite.mocks;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//для связи и нтерфейсов  и класов
+builder.Services.AddTransient<IAllCars, MockCars>();
+builder.Services.AddTransient<ICarsCategory, MockCategory>();
 
 var app = builder.Build();
 

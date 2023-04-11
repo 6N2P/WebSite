@@ -4,6 +4,6 @@ namespace WebSite.interfaces
 {
     public interface ICarsCategory
     {
-        IEnumerable<Category> AllCategories { get; }
+      public  IEnumerable<Category> AllCategories { get; }
     }
 }
