@@ -27,6 +27,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//При старте программы вызывается для загрузки данных из бд
+
+using (var scope = ((IApplicationBuilder)app).ApplicationServices.CreateScope())
+{
+    AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
+    DBObjects.Initial(content);
+}
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
