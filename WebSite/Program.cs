@@ -3,12 +3,19 @@ using WebSite.interfaces;
 using WebSite.mocks;
 using Microsoft.EntityFrameworkCore;
 using WebSite.Data.Repository;
+using WebSite.Migrations;
+using WebSite.Models;
+using ShopCart = WebSite.Models.ShopCart;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Получаю строку подключения из файла конфигурации
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+//чтоб не отображалась одинаковаф корзина для разных леюдей
+builder.Services.AddScoped(sp => ShopCart.GetCart(sp));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //Подключение к БД
@@ -16,6 +23,9 @@ builder.Services.AddDbContext<AppDBContent>(options => options.UseSqlServer(conn
 //для связи и нтерфейсов  и класов
 builder.Services.AddTransient<IAllCars, CarRepository>();
 builder.Services.AddTransient<ICarsCategory, CategoryRepository>();
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -43,6 +53,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
