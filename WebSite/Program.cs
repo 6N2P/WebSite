@@ -23,6 +23,7 @@ builder.Services.AddDbContext<AppDBContent>(options => options.UseSqlServer(conn
 //для связи и нтерфейсов  и класов
 builder.Services.AddTransient<IAllCars, CarRepository>();
 builder.Services.AddTransient<ICarsCategory, CategoryRepository>();
+builder.Services.AddTransient<IAllOrders, OrdersRepository>();
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
