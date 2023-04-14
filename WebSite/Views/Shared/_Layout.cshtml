@@ -11,20 +11,42 @@
 <body>
     <header>
         <span class="logo">12AX7</span>
-        <nav>
-            <a href="/">Главная</a>
-            <a href="/contacts">Обратная связь</a>
-            <a href="/Cars/ListCar">Машины</a>
-            <a href="/ShopCart/Index">Карзина</a>
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="/">Главная </a>&nbsp;
+                    </li>
+                    <li class="nav-item">
+                        <a href="/contacts">Обратная связь</a>&nbsp;
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Cars/ListCar">Машины</a>&nbsp;
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Cars/ListCar/electro">Эллектро машины</a>&nbsp;
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Cars/ListCar/fuel">Бензиновые машины</a>&nbsp;
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ShopCart/Index">Корзина</a>&nbsp;
+                    </li>
+                </ul>
+                <form class="form-inline mt-2 mt-md-0" style="position:absolute; top:0; right:0; margin-right:30px">
+                    <input class="from-control mr-sm-2" type="text" placeholder="Поиск" aria-label="Serch" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+                </form>
+            </div>
         </nav>
     </header>
-    <main>
+    <main">
         @RenderBody()
     </main>
 
     <footer class="container">
     <p class="float-end"><a href="#">Back to top</a></p>
-    <p>© 2017–2023 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+    <p>© 2023 Company, Inc. · <a href="#">Privacy</a></p>
   </footer>
  
 

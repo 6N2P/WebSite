@@ -51,11 +51,17 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
 
 app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "categoryFilter",
+    pattern: "{Controller=Cars}/{action}/{category?}");
 
 app.Run();

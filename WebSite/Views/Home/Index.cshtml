@@ -1,7 +1,16 @@
-﻿@{
+﻿@model HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Главная страница</h1>    
+</div>
+<h1>Лучшие автомобили</h1>
+<div class="row mt-5 mb-2; ">
+    @{
+        foreach(Car car in Model.favCars){
+                    @Html.Partial("AllCars", car)
+        }
+    }
 </div>

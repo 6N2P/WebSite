@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebSite.interfaces;
+using WebSite.Models;
 using WebSite.ViewModels;
 
 namespace WebSite.Controllers
@@ -14,15 +15,40 @@ namespace WebSite.Controllers
             _allCars = iAllCars;
             _allCategories = iCarsCat;
         }
-
-        public ViewResult ListCar()
+        [Route("Cars/ListCar")]
+        [Route("Cars/ListCar/{category}")]
+        public ViewResult ListCar(string category)
         {
-              ViewBag.Tatel = "Хоть чё можно передать"; //при помощи viewBag можно передавать что угодно в представление
+            string _category = category;
+            IEnumerable<Car> cars = null;
+            string currCategory = "";
+            if (string.IsNullOrEmpty(_category))
+            {
+                cars = _allCars.Cars.OrderBy(i => i.id);
+            }
+            else
+            {
+                if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    cars = _allCars.Cars.Where(i => i.Category.categoryName.Equals("Электромобили")).
+                        OrderBy(i => i.id);
+                }
+                else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    cars = _allCars.Cars.Where(i => i.Category.categoryName.Equals("Класические автомобили")).
+                        OrderBy(i => i.id);
+                }
+                currCategory = _category;                              
+            }
+            var carObj = new CarsListViweModel
+            {
+                allCars = cars,
+                currCategory = currCategory
+            };
+            ViewBag.Tatel = "Хоть чё можно передать"; //при помощи viewBag можно передавать что угодно в представление
             //  var cars=_allCars.Cars;
-            CarsListViweModel obj = new CarsListViweModel();
-            obj.allCars=_allCars.Cars;
-            obj.currCategory = "Автомобили";
-            return View(obj);
+           
+            return View(carObj);
         }
     }
 }
